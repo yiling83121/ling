@@ -3,692 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>退休夢想藍圖 | 缺口線上試算</title>
+  <title>喵懂保險 🐾</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
-
+    /* 韓式淡藍色調配色 */
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --accent-orange: #f97316;
-      --accent-yellow: #f59e0b;
-      --bg: #f8fafc;
+      --bg-color: #f2f7fa;
       --card-bg: #ffffff;
-      --text: #0f172a;
-      --text-muted: #64748b;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --primary-blue: #9bbec8;
+      --accent-blue: #427d9d;
+      --text-color: #4a5568;
+      --soft-shadow: 0 8px 20px rgba(155, 190, 200, 0.15);
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding-bottom: 90px;
-    }
-
-    /* 頂部 Hero 區塊 */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 280px;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.65) 0%, rgba(30, 58, 138, 0.5) 100%), 
-                  url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      border-radius: 0 0 30px 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      min-height: 100vh;
     }
 
-    .hero-badge {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 4px 16px;
-      border-radius: 50px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-      color: #fef08a;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-size: 30px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-      background: linear-gradient(to right, #ffffff, #e0f2fe);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: 14px;
-      opacity: 0.95;
-      max-width: 420px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-      font-weight: 500;
-    }
-
-    /* 主要容器 */
     .container {
-      max-width: 550px;
-      margin: -35px auto 30px;
-      padding: 0 16px;
-      position: relative;
-      z-index: 10;
+      width: 90%;
+      max-width: 480px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 32px 24px;
+      box-shadow: var(--soft-shadow);
+      text-align: center;
+      margin: 20px auto;
     }
 
-    .card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 24px 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    /* 標題與貓咪風格 Header */
+    .header {
       margin-bottom: 24px;
     }
 
-    .section-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #1e3a8a;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .cat-avatar {
+      font-size: 50px;
+      background-color: #e2f1f8;
+      width: 90px;
+      height: 90px;
+      line-height: 90px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    /* 有趣風格表單外框 */
-    .fun-input-card {
-      background: #f8fafc;
-      border: 2px dashed #cbd5e1;
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 18px;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .fun-input-card:hover, .fun-input-card:focus-within {
-      border-color: var(--primary);
-      border-style: solid;
-      background: #ffffff;
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.08);
-      transform: translateY(-2px);
-    }
-
-    .fun-input-card .card-icon {
-      position: absolute;
-      right: 14px;
-      top: 14px;
-      font-size: 20px;
-      opacity: 0.8;
-    }
-
-    .label-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      padding-right: 25px;
-    }
-
-    label {
+    .title {
+      font-size: 24px;
       font-weight: 700;
-      font-size: 15px;
-      color: #334155;
+      color: var(--accent-blue);
+      margin: 0 0 8px 0;
+      letter-spacing: 1px;
     }
 
-    .value-badge {
-      background: #dbeafe;
-      color: var(--primary-dark);
-      padding: 3px 12px;
-      border-radius: 20px;
-      font-weight: 800;
+    .subtitle {
       font-size: 14px;
+      color: #8899a6;
+      margin: 0;
     }
 
-    .slider-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    input[type="range"] {
-      flex: 1;
-      height: 8px;
-      border-radius: 5px;
-      background: #e2e8f0;
-      outline: none;
-      accent-color: var(--primary);
-      cursor: pointer;
-    }
-
-    .number-input-group {
-      display: flex;
-      align-items: center;
-      background: #ffffff;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 10px;
-      padding: 2px 12px;
-      margin-top: 6px;
-    }
-
-    .number-input-group input {
-      width: 100%;
-      padding: 8px 0;
-      border: none;
-      background: transparent;
-      font-size: 16px;
-      font-weight: 700;
-      color: #0f172a;
-      outline: none;
-    }
-
-    .number-input-group .unit {
-      color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    /* 多選核取方塊樣式 (目前投資/儲蓄) */
-    .checkbox-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #ffffff;
-      border: 1.5px solid #cbd5e1;
-      padding: 8px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      color: #334155;
-      transition: all 0.2s ease;
-    }
-
-    .checkbox-item input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--primary);
-      cursor: pointer;
-    }
-
-    .checkbox-item:hover {
-      border-color: var(--primary);
-      background: #f0fdf4;
-    }
-
-    /* 中間圖片：卡通退休環遊世界 */
-    .image-banner {
-      width: 100%;
-      height: 160px;
-      border-radius: 14px;
-      object-fit: cover;
-      margin: 10px 0 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    /* 結果區塊 */
-    .result-box {
-      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-      color: white;
+    /* 內容卡片區域 */
+    .content-card {
+      background-color: #f8fbfe;
+      border: 1.5px dashed var(--primary-blue);
       border-radius: 16px;
       padding: 20px;
-      margin-top: 10px;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+      margin-top: 20px;
+      text-align: left;
     }
 
-    .result-title {
-      font-size: 15px;
-      opacity: 0.9;
-      margin-bottom: 14px;
-      text-align: center;
+    .card-title {
       font-weight: 600;
-    }
-
-    .result-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .result-item {
-      background: rgba(255, 255, 255, 0.12);
-      padding: 12px;
-      border-radius: 10px;
-      backdrop-filter: blur(5px);
-    }
-
-    .result-item.full-width {
-      grid-column: span 2;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    .result-label {
-      font-size: 12px;
-      opacity: 0.85;
-      margin-bottom: 4px;
-    }
-
-    .result-value {
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .result-value.highlight {
-      color: #fde047;
-      font-size: 23px;
-    }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.25);
-      border-radius: 4px;
-      margin-top: 8px;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: #4ade80;
-      width: 0%;
-      transition: width 0.4s ease;
-    }
-
-    /* 貼心建議欄 */
-    .advice-card {
-      background: #fff8f1;
-      border: 2px solid #ffedd5;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 6px 18px rgba(249, 115, 22, 0.06);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .advice-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 6px;
-      height: 100%;
-      background: var(--accent-orange);
-    }
-
-    .advice-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #c2410c;
-      font-weight: 800;
-      font-size: 17px;
-      margin-bottom: 12px;
-    }
-
-    .advice-content {
-      font-size: 14px;
-      color: #475569;
-      line-height: 1.75;
-    }
-
-    .advice-list {
-      margin-top: 10px;
-      padding-left: 18px;
-    }
-
-    .advice-list li {
+      color: var(--accent-blue);
       margin-bottom: 8px;
-    }
-
-    /* 個人名片區塊 (無人物照片) */
-    .profile-card {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 25px 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-      text-align: center;
-      border: 1px solid #f1f5f9;
-    }
-
-    .profile-name {
-      font-size: 21px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 4px;
-    }
-
-    .profile-title {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      font-weight: 500;
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .contact-item {
       display: flex;
       align-items: center;
+      gap: 6px;
+    }
+
+    .card-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #667085;
+      margin: 0;
+    }
+
+    /* 可愛裝飾小標籤 */
+    .badges {
+      display: flex;
       justify-content: center;
       gap: 8px;
-      font-size: 15px;
-      color: #334155;
-      font-weight: 600;
-      background: #f8fafc;
-      padding: 11px;
-      border-radius: 10px;
-      text-decoration: none;
-      border: 1px solid #e2e8f0;
-      transition: background 0.2s;
+      margin-top: 20px;
     }
 
-    .contact-item:hover {
-      background: #f1f5f9;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn {
-      flex: 1;
-      padding: 12px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 15px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-    }
-
-    .btn-line {
-      background-color: #06C755;
-      color: white;
-    }
-
-    .btn-line:hover {
-      background-color: #05b34c;
-    }
-
-    .btn-phone {
-      background-color: var(--primary);
-      color: white;
-    }
-
-    .btn-phone:hover {
-      background-color: var(--primary-dark);
-    }
-
-    /* 懸浮底部按鈕 */
-    .fixed-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      padding: 12px 20px;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-      display: flex;
-      justify-content: center;
-      z-index: 100;
-    }
-
-    .fixed-footer .btn {
-      max-width: 500px;
-      width: 100%;
-      box-shadow: 0 4px 14px rgba(6, 199, 85, 0.35);
+    .badge {
+      background-color: #eaf4f8;
+      color: var(--accent-blue);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
 
-  <!-- 頂部主題區 -->
-  <div class="hero">
-    <div class="hero-badge">RETIREMENT PLANNER</div>
-    <h1>理想退休生活試算</h1>
-    <p>提早勾勒未來的精彩藍圖，讓歲月靜好、生活無憂</p>
-  </div>
-
   <div class="container">
-    
-    <!-- 試算表單卡片 -->
-    <div class="card">
-      <div class="section-title">
-        <span>🎨</span> 試算您的退休藍圖
-      </div>
-
-      <!-- 1. 現在幾歲 -->
-      <div class="fun-input-card">
-        <span class="card-icon">🎂</span>
-        <div class="label-row">
-          <label for="currentAge">您現在幾歲？</label>
-          <span class="value-badge"><span id="currentAgeVal">35</span> 歲</span>
-        </div>
-        <div class="slider-container">
-          <input type="range" id="currentAge" min="18" max="80" value="35" oninput="updateCalculations()">
-        </div>
-      </div>
-
-      <!-- 2. 預計退休年齡 -->
-      <div class="fun-input-card">
-        <span class="card-icon">🏖️</span>
-        <div class="label-row">
-          <label for="retireAge">預計幾歲退休？</label>
-          <span class="value-badge"><span id="retireAgeVal">65</span> 歲</span>
-        </div>
-        <div class="slider-container">
-          <input type="range" id="retireAge" min="40" max="85" value="65" oninput="updateCalculations()">
-        </div>
-      </div>
-
-      <!-- 中間圖片：卡通退休環遊世界 -->
-      <img src="https://img.freepik.com/free-vector/retired-elderly-couple-traveling-flat-illustration_74855-20037.jpg" alt="卡通退休環遊世界" class="image-banner">
-
-      <!-- 3. 預期每月生活費 -->
-      <div class="fun-input-card">
-        <span class="card-icon">☕</span>
-        <div class="label-row">
-          <label for="monthlyExpense">退休後期望每月生活費</label>
-        </div>
-        <div class="number-input-group">
-          <input type="number" id="monthlyExpense" value="5" min="1" step="0.5" oninput="updateCalculations()">
-          <span class="unit">萬元 / 月</span>
-        </div>
-      </div>
-
-      <!-- 4. 預計退休生活幾年 -->
-      <div class="fun-input-card">
-        <span class="card-icon">🏡</span>
-        <div class="label-row">
-          <label for="lifeYears">預計享受退休生活幾年？</label>
-          <span class="value-badge"><span id="lifeYearsVal">25</span> 年</span>
-        </div>
-        <div class="slider-container">
-          <input type="range" id="lifeYears" min="10" max="40" value="25" oninput="updateCalculations()">
-        </div>
-      </div>
-
-      <!-- 5. 目前投資或儲蓄配置 (已替換原本的已準備/勞退預估行) -->
-      <div class="fun-input-card">
-        <span class="card-icon">📈</span>
-        <div class="label-row">
-          <label>目前已進行哪些投資或儲蓄？</label>
-        </div>
-        <div class="checkbox-group">
-          <label class="checkbox-item"><input type="checkbox" checked> 定期定額基金</label>
-          <label class="checkbox-item"><input type="checkbox" checked> 台股 / 美股 ETF</label>
-          <label class="checkbox-item"><input type="checkbox"> 銀行定期儲蓄</label>
-          <label class="checkbox-item"><input type="checkbox" checked> 儲蓄型/投資型保單</label>
-          <label class="checkbox-item"><input type="checkbox"> 勞退自提 6%</label>
-          <label class="checkbox-item"><input type="checkbox"> 房產 / 租金收入</label>
-        </div>
-        <div style="margin-top: 14px;">
-          <div class="label-row">
-            <label for="currentSavings">估計目前資產累積總額</label>
-          </div>
-          <div class="number-input-group">
-            <input type="number" id="currentSavings" value="150" min="0" step="10" oninput="updateCalculations()">
-            <span class="unit">萬元</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 試算結果區 -->
-      <div class="result-box">
-        <div class="result-title">✨ 您的退休準備度分析</div>
-        <div class="result-grid">
-          <div class="result-item">
-            <div class="result-label">預期退休總金流需求</div>
-            <div class="result-value"><span id="totalNeeded">0</span> <span style="font-size:12px">萬</span></div>
-          </div>
-          <div class="result-item">
-            <div class="result-label">距離目標尚有</div>
-            <div class="result-value"><span id="yearsLeft">0</span> <span style="font-size:12px">年</span></div>
-          </div>
-          <div class="result-item full-width">
-            <div class="result-label">估算總準備缺口</div>
-            <div class="result-value highlight"><span id="gap">0</span> <span style="font-size:14px">萬元</span></div>
-            <div class="progress-bar-bg">
-              <div class="progress-bar-fill" id="progressBar"></div>
-            </div>
-            <div style="font-size:11px; margin-top:5px; opacity:0.85; text-align:right;">目標達成進度：<span id="rateVal">0</span>%</div>
-          </div>
-          <div class="result-item full-width" style="background: rgba(254, 240, 138, 0.18); border: 1px solid rgba(254, 240, 138, 0.4);">
-            <div class="result-label" style="color:#fef08a">平均每月建議累積目標</div>
-            <div class="result-value" style="color:#fef08a"><span id="monthlySave">0</span> <span style="font-size:14px">元 / 月</span></div>
-          </div>
-        </div>
-      </div>
-
+    <!-- 主題 header（替換原個人照） -->
+    <div class="header">
+      <div class="cat-avatar">🐱</div>
+      <h1 class="title">喵懂保險 🐾</h1>
+      <p class="subtitle">輕鬆看懂保險，讓貓貓陪你安心規劃！</p>
     </div>
 
-    <!-- 貼心建議欄 -->
-    <div class="card advice-card">
-      <div class="advice-header">
-        <span style="font-size:22px;">🍀</span> 打造理想退休的 3 個溫馨小指引
-      </div>
-      <div class="advice-content">
-        優雅退休的祕訣在於**「讓時間成為你最好的朋友」**。試算結果是一個清晰的起點，幫助我們更從容地迎接未來：
-        <ul class="advice-list">
-          <li><strong>算入通膨影響：</strong> 隨著物價指數微漲，未來的購買力需要適度預留彈性空間。</li>
-          <li><strong>建立多元現金流：</strong> 搭配國家保障、投資理財與穩健配置，創造源源不絕的退休月退俸。</li>
-          <li><strong>專屬量身客製：</strong> 每個人的生活藍圖皆獨一無二，透過全盤檢視能讓準備過程更輕鬆無負擔。</li>
-        </ul>
-      </div>
+    <!-- 標籤風格 -->
+    <div class="badges">
+      <span class="badge">😸 簡單易懂</span>
+      <span class="badge">🐟 拒絕踩雷</span>
+      <span class="badge">🐾 安心保障</span>
     </div>
 
-    <!-- 個人名片區塊 (已移除最下方的人物圖片) -->
-    <div class="profile-card">
-      <div class="profile-name">宋宜菱</div>
-      <div class="profile-title">退休資產與生活藍圖規劃顧問</div>
-
-      <div class="contact-info">
-        <a href="tel:0966881300" class="contact-item">
-          <span>📞</span> 服務專線：0966881300
-        </a>
-        <a href="https://line.me/ti/p/~yiling1201" target="_blank" class="contact-item">
-          <span>💬</span> LINE 官方帳號：yiling1201
-        </a>
+    <!-- 保險資訊簡介卡片 -->
+    <div class="content-card">
+      <div class="card-title">
+        <span>🐾</span> 為什麼需要「喵懂保險」？
       </div>
-
-      <div class="btn-group">
-        <a href="tel:0966881300" class="btn btn-phone">
-          <span>📞</span> 電話聯繫
-        </a>
-        <a href="https://line.me/ti/p/~yiling1201" target="_blank" class="btn btn-line">
-          <span>💬</span> 加 LINE 交流
-        </a>
-      </div>
+      <p class="card-text">
+        保險條款太複雜？別擔心！這裡用最可愛、最白話的方式，幫你梳理各類保障重點，陪你一起挑選最適合的方案。
+      </p>
     </div>
-
   </div>
-
-  <!-- 手機端固定底部按鈕 -->
-  <div class="fixed-footer">
-    <a href="https://line.me/ti/p/~yiling1201" target="_blank" class="btn btn-line">
-      <span>💬</span> 聯繫宋宜菱，聊聊您的退休生活藍圖
-    </a>
-  </div>
-
-  <script>
-    function updateCalculations() {
-      const currentAge = parseInt(document.getElementById('currentAge').value);
-      const retireAge = parseInt(document.getElementById('retireAge').value);
-      const monthlyExpense = parseFloat(document.getElementById('monthlyExpense').value) || 0;
-      const lifeYears = parseInt(document.getElementById('lifeYears').value);
-      const currentSavings = parseFloat(document.getElementById('currentSavings').value) || 0;
-
-      document.getElementById('currentAgeVal').innerText = currentAge;
-      document.getElementById('retireAgeVal').innerText = retireAge;
-      document.getElementById('lifeYearsVal').innerText = lifeYears;
-
-      let yearsLeft = retireAge - currentAge;
-      if (yearsLeft <= 0) {
-        yearsLeft = 0;
-      }
-
-      const totalNeeded = monthlyExpense * 12 * lifeYears;
-      const gap = totalNeeded - currentSavings;
-      const finalGap = gap > 0 ? gap : 0;
-
-      let monthlySave = 0;
-      if (yearsLeft > 0 && finalGap > 0) {
-        monthlySave = Math.round((finalGap * 10000) / (yearsLeft * 12));
-      }
-
-      let rate = 0;
-      if (totalNeeded > 0) {
-        rate = Math.min(100, Math.round((currentSavings / totalNeeded) * 100));
-      }
-
-      document.getElementById('totalNeeded').innerText = totalNeeded.toLocaleString();
-      document.getElementById('yearsLeft').innerText = yearsLeft;
-      document.getElementById('gap').innerText = finalGap.toLocaleString();
-      document.getElementById('monthlySave').innerText = monthlySave.toLocaleString();
-      document.getElementById('progressBar').style.width = rate + '%';
-      document.getElementById('rateVal').innerText = rate;
-    }
-
-    updateCalculations();
-  </script>
 
 </body>
 </html>
